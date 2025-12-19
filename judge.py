@@ -58,7 +58,7 @@ for i in range(1, 10):
     expected_lines = output_i.split("\r\n")
     result_lines = stdout.split("\n")
 
-    #print(*result_lines, sep = "\n")
+    #print(stdout)
 
     # 行数を揃える
     max_len = max(len(expected_lines), len(result_lines))
