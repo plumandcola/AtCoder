@@ -55,7 +55,7 @@ for i in range(1, 10):
     output_i = output_i.lstrip() #昔のは、入出力例の最初に無駄な改行が入るため、それを除去
 
     # 行に分割
-    expected_lines = output_i.split("\r\n")
+    expected_lines = output_i.splitlines()
     result_lines = stdout.split("\n")
 
     #print(stdout)
