@@ -21,7 +21,7 @@ res = requests.get(link)
 #print(res.text)
 
 for i in range(1, 10):
-    found = re.search(rf"入力例 {i}(.*?)</pre>", res.text, re.DOTALL)
+    found = re.search(rf"入力例 ?{i}(.*?)</pre>", res.text, re.DOTALL)
     if found is None:
         break
 
@@ -50,7 +50,7 @@ for i in range(1, 10):
         print(stdout.strip())
         continue
 
-    output_i = re.search(rf"出力例 {i}(.*?)</pre>", res.text, re.DOTALL).group(1)
+    output_i = re.search(rf"出力例 ?{i}(.*?)</pre>", res.text, re.DOTALL).group(1)
     output_i = re.sub("<.+?>", "", output_i) #HTMLタグを除去
     output_i = output_i.lstrip() #昔のは、入出力例の最初に無駄な改行が入るため、それを除去
 
