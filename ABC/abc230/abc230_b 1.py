@@ -1,0 +1,1 @@
+print("Yes" if input() in "oxx" * 4 else "No")
