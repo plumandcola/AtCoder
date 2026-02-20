@@ -1,0 +1,1 @@
+print(111 * sum(map(int, input())))
