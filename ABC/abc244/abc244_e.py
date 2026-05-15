@@ -14,12 +14,13 @@ b: 0ならXが偶数回、1ならXが奇数回
 v: Aの末尾
 """
 dp[0][0][S-1] = 1
+mod = 998244353
 for i in range(K):
     for b in range(2):
         for v in range(N):
             if v == X-1:
-                dp[i+1][b][v] = sum(dp[i][b^1][u] for u in g[v]) % 998244353
+                dp[i+1][b][v] = sum(dp[i][b^1][u] for u in g[v]) % mod
             else:
-                dp[i+1][b][v] = sum(dp[i][b][u] for u in g[v]) % 998244353
+                dp[i+1][b][v] = sum(dp[i][b][u] for u in g[v]) % mod
 
 print(dp[K][0][T-1])
