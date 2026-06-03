@@ -1,28 +1,34 @@
-def find(x: int) -> int:
-    """要素xが属するグループの根を返す"""
-    if parents[x] < 0: #根
-        return x
-    else:
-        parents[x] = find(parents[x]) #経路圧縮
-        return parents[x]
+class UnionFind():
+    def __init__(self, n):
+        self.n = n
+        self.parents = [-1] * n
+        """各要素の親要素の番号を格納するリスト、要素が根（ルート）の場合は-(そのグループの要素数)を格納する"""
+    
+    def find(self, x: int) -> int:
+        """要素xが属するグループの根を返す"""
+        if self.parents[x] < 0: #根
+            return x
+        else:
+            self.parents[x] = self.find(self.parents[x]) #経路圧縮
+            return self.parents[x]
 
-def union(x: int, y: int):
-    """要素xが属するグループと要素yが属するグループとを併合する"""
-    x = find(x)
-    y = find(y)
-    
-    if x == y:
-        return
-    
-    if parents[x] > parents[y]:
-        x, y = y, x
-    
-    parents[x] += parents[y]
-    parents[y] = x
+    def union(self, x: int, y: int):
+        """要素xが属するグループと要素yが属するグループとを併合する"""
+        x = self.find(x)
+        y = self.find(y)
+        
+        if x == y:
+            return
+        
+        if self.parents[x] > self.parents[y]:
+            x, y = y, x
+        
+        self.parents[x] += self.parents[y]
+        self.parents[y] = x
 
-def same(x: int, y: int) -> bool:
-    """要素x, yが同じグループに属するかどうかを返す"""
-    return find(x) == find(y)
+    def same(self, x: int, y: int) -> bool:
+        """要素x, yが同じグループに属するかどうかを返す"""
+        return self.find(x) == self.find(y)
 
 
 N, M = map(int, input().split())
@@ -37,11 +43,10 @@ for _ in range(M):
 
 edges.sort()
 
-parents = [-1] * N
-"""各要素の親要素の番号を格納するリスト、要素が根（ルート）の場合は-(そのグループの要素数)を格納する"""
+uf = UnionFind(N)
 for C, A, B in edges:
-    if not same(A, B):
-        union(A, B)
+    if not uf.same(A, B):
+        uf.union(A, B)
         if C > 0:
             s -= C
 
