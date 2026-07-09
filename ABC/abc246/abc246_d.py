@@ -7,6 +7,7 @@ N = int(input())
 ans = float("inf")
 a = 0
 while 4*a*a*a < ans:
+    #二分探索
     l = a - 1
     r = 1000001
     while r - l > 1:
