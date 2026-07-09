@@ -1,6 +1,7 @@
 N, K = map(int, input().split())
 A = list(map(int, input().split()))
 
+#二分探索
 l = 0
 r = max(A) + 1
 while r - l > 1:
