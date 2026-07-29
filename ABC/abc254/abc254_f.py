@@ -3,7 +3,7 @@ import math
 class SegmentTree:
     def __init__(self, A: list[int]):
         self.N = len(A)
-        self.n = (self.N-1).bit_length()
+        self.n = (self.N - 1).bit_length()
         self.SegmentTree = [0] * (1 << (self.n + 1))
         self.SegmentTree[1 << self.n : (1 << self.n) + self.N] = A[:]
         for pos in range((1 << self.n) - 1, 0, -1):
