@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    
+    vector<int> a(n);
+    vector<int> s(n+1); // s[i] := a[i-1]までの和
+    if (n >= 3) {
+        a[2] = 1;
+        s[3] = 1;
+        for (int i = 0; i < n-3; i++) {
+            a[i+3] = s[i+3] - s[i];
+            a[i+3] = (a[i+3] + 10007) % 10007; // 引き算をして負になっても、余りが正になるようにする
+            s[i+4] = s[i+3] + a[i+3];
+            s[i+4] = (s[i+4] + 10007) % 10007; // 引き算をして負になっても、余りが正になるようにする
+        }
+    }
+    
+    cout << a[n-1] << endl;
+}
