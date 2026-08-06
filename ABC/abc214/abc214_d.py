@@ -1,6 +1,6 @@
 import heapq
 
-class UnionFind():
+class UnionFind:
     def __init__(self, n):
         self.n = n
         self.parents = [-1] * n
