@@ -1,4 +1,4 @@
-class BIT():
+class BIT:
     def __init__(self, n: int): #BITの作成
         self.Tree = [0] * (n+1) #0で初期化
         self.n = n
