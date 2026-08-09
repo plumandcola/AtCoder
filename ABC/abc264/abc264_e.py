@@ -1,5 +1,5 @@
 class UnionFind:
-    def __init__(self, n):
+    def __init__(self, n: int):
         self.n = n
         self.parents = [-1] * n
         """各要素の親要素の番号を格納するリスト、要素が根（ルート）の場合は-(そのグループの要素数)を格納する"""
