@@ -20,7 +20,7 @@ class SegmentTree:
                 l += 1
             if r & 1 == 1:
                 r -= 1
-                value_r = math.gcd(value_r, self.SegmentTree[r])
+                value_r = math.gcd(self.SegmentTree[r], value_r)
             l >>= 1
             r >>= 1
         return math.gcd(value_l, value_r)
