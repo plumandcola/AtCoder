@@ -9,9 +9,9 @@ int main() {
     long long ans = N * C;
     for (long long i = 0; i <= N; i++) { // 普通の食事をとる日数
         for (long long j = 0; j <= N-i; j++) { // 質素な食事をとる日数
-            long long ans_ij = A * i + C * j; // 食費の合計
-            long long s = H + B * i + D * j - E * (N - i - j); // 満腹度
-            if (s > 0) ans = min(ans, ans_ij);
+            if (H + B * i + D * j - E * (N - i - j) > 0) { // 満腹度が0以下にならないようにできる
+                ans = min(ans, A * i + C * j);
+            }
         }
     }
 
