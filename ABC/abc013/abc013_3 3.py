@@ -1,6 +1,6 @@
+#40点解法
 from collections import defaultdict
 
-#40点解法
 N, H = map(int, input().split())
 A, B, C, D, E = map(int, input().split())
 
