@@ -13,14 +13,14 @@ long long power(long long a, long long b) {
 
 int main() {
     // 10点解法
-    int N, H, A, B, C, D, E;
+    long long N, H, A, B, C, D, E;
     cin >> N >> H >> A >> B >> C >> D >> E;
 
     long long ans = N * C;
-    for (int b = 0; b < power(3, N); b++) {
+    for (long long b = 0; b < power(3, N); b++) {
         long long ans_i = 0; // 食費の合計
         long long h = H; // 満腹度
-        for (int i = 0; i < N; i++) {
+        for (long long i = 0; i < N; i++) {
             if ((b / power(3, i)) % 3 == 0) {
                 ans_i += A;
                 h += B;
