@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool dfs(int n, const int& k, const vector<vector<int>>& T, const int& x) {
+bool dfs(const int& n, const vector<vector<int>>& T, const int& x) {
     // x: 今までのxorの累積
     if (n == 0) { // 全ての質問を探索した
         if (x == 0) return true; // 排他的論理和が0になる選択肢の組み合わせがあった
@@ -10,7 +10,7 @@ bool dfs(int n, const int& k, const vector<vector<int>>& T, const int& x) {
 
     bool result = false;
     for (const int& t : T[n-1]) {
-        result |= dfs(n-1, k, T, x ^ t);
+        result |= dfs(n-1, T, x ^ t);
         // 論理和を用いているので、排他的論理和が0になる選択肢の組み合わせが1つでもあればtrueになる
     }
     return result;
@@ -26,5 +26,5 @@ int main() {
         }
     }
 
-    cout << (dfs(N, K, T, 0) ? "Found" : "Nothing") << endl;
+    cout << (dfs(N, T, 0) ? "Found" : "Nothing") << endl;
 }
