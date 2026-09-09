@@ -6,7 +6,7 @@ def matrix_product(A, B):
     for i in range(m):
         for j in range(l):
             for k in range(n):
-                AB[i][j] = AB[i][j] + A[i][k] * B[k][j]
+                AB[i][j] += A[i][k] * B[k][j]
     return AB
 
 
