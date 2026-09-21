@@ -2,7 +2,7 @@ N = int(input())
 
 spf = list(range(N+1)) #spf = smallest prime factor = 最小素因数
 for p in range(2, N+1):
-    for i in range(2 * p, N+1, p):
+    for i in range(p * p, N+1, p):
         spf[i] = min(spf[i], p)
 
 ans = 0
