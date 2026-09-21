@@ -4,7 +4,7 @@ is_prime[1] = False #1は素数じゃない
 s = [0] * 201
 for n in range(2, 201):
     if is_prime[n]: #nが素数なら
-        for i in range(2*n, 201, n):
+        for i in range(n*n, 201, n):
             is_prime[i] = False
     
     s[n] = s[n-1] + is_prime[n]
