@@ -10,7 +10,7 @@ while r - l > 1:
     else:
         r = mid
 
-N_cbrt = l #Nの3乗根(切り上げ)
+N_cbrt = r #Nの3乗根(切り上げ)
 
 is_prime = [True] * (N_cbrt+1)
 is_prime[0] = False #0は素数じゃない
