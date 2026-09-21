@@ -7,7 +7,7 @@ prime_numbers = []
 for n in range(2, 201):
     if is_prime[n]: #nが素数なら
         prime_numbers.append(n)
-        for i in range(2*n, 201, n):
+        for i in range(n*n, 201, n):
             is_prime[i] = False
 
 A, B, C, D = map(int, input().split())
