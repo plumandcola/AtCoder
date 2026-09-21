@@ -3,7 +3,7 @@ is_prime[0] = False #0は素数じゃない
 is_prime[1] = False #1は素数じゃない
 for n in range(2, 201):
     if is_prime[n]: #nが素数なら
-        for i in range(2*n, 201, n):
+        for i in range(n*n, 201, n):
             is_prime[i] = False
 
 A, B, C, D = map(int, input().split())
