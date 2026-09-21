@@ -1,9 +1,11 @@
 N = int(input())
 
 spf = list(range(N+1)) #spf = smallest prime factor = 最小素因数
-for p in range(2, N+1):
+p = 2
+while p * p <= N:
     for i in range(p * p, N+1, p):
         spf[i] = min(spf[i], p)
+    p += 1
 
 ans = 0
 for i in range(1, N+1):
