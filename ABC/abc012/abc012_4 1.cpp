@@ -4,7 +4,7 @@ using namespace std;
 using pii = pair<int, int>;
 
 int main() {
-    int N, M, a, b, t;
+    int N, M, a, b, t, INF = 1 << 30;
     cin >> N >> M;
 
     vector<vector<pii>> g(N);
@@ -14,22 +14,24 @@ int main() {
         g[b-1].push_back({a-1, t});
     }
 
-    int ans = 1 << 30;
+    int ans = INF;
     for (int i = 0; i < N; i++) { // i番目のバス停に引っ越した際
-        vector<int> time(N, -1);
+        // ダイクストラ法
+        vector<int> time(N, INF);
+        time[i] = 0;
         priority_queue<pii, vector<pii>, greater<pii>> q;
         q.push({0, i});
         while (!q.empty()) {
-            int T = q.top().first;
-            int v = q.top().second;
+            auto [T, v] = q.top();
             q.pop();
-            if (time[v] != -1) continue;
+            if (time[v] < T) continue;
 
-            time[v] = T;
-            for (int j = 0; j < g[v].size(); j++) {
-                int u = g[v][j].first;
-                int t = g[v][j].second;
-                if (time[u] == -1) q.push({T + t, u});
+            for (auto [u, t] : g[v]) {
+                int T_new = T + t;
+                if (time[u] > T_new) {
+                    q.push({T_new, u});
+                    time[u] = T_new;
+                }
             }
         }
         ans = min(ans, *max_element(time.begin(), time.end()));

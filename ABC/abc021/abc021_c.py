@@ -14,7 +14,7 @@ ans = [0] * N
 ans[a-1] = 1
 d = [-1] * N
 d[a-1] = 0
-q = deque([a-1])
+q = deque([a-1]) #bfs
 mod = 1000000007
 while q:
     v = q.popleft()

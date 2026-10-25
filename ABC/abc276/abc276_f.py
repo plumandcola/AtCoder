@@ -1,31 +1,32 @@
 class SegmentTree:
     def __init__(self, N: int):
         self.N = N
-        self.n = (self.N-1).bit_length()
-        self.SegmentTree = [0] * (1 << (self.n + 1))
-
+        self.n = (self.N - 1).bit_length()
+        self.size = 1 << self.n
+        self.tree = [0] * (self.size << 1)
+    
     def add(self, pos: int, x: int):
         """pos (0 ≤ pos < N)番目の値にxを足す"""
-        pos += 1 << self.n
-        self.SegmentTree[pos] += x
+        pos += self.size
+        self.tree[pos] += x
         pos >>= 1
         while pos > 0:
-            self.SegmentTree[pos] = self.SegmentTree[pos << 1] + self.SegmentTree[pos << 1 | 1]
+            self.tree[pos] = self.tree[pos << 1] + self.tree[pos << 1 | 1]
             pos >>= 1
 
     def query(self, l: int, r: int) -> int:
         """[l, r) (0 ≤ l < N, 1 ≤ r ≤ N)の和を求める"""
-        l += 1 << self.n
-        r += 1 << self.n
+        l += self.size
+        r += self.size
         value_l = 0
         value_r = 0
         while l != r:
             if l & 1 == 1:
-                value_l += self.SegmentTree[l]
+                value_l += self.tree[l]
                 l += 1
             if r & 1 == 1:
                 r -= 1
-                value_r += self.SegmentTree[r]
+                value_r += self.tree[r]
             l >>= 1
             r >>= 1
         return value_l + value_r

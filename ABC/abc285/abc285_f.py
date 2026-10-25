@@ -1,45 +1,46 @@
 class SegmentTree:
     def __init__(self, A: list[int], func, ide_ele):
         self.N = len(A)
-        self.n = (self.N-1).bit_length()
-        self.ide_ele = ide_ele
-        self.SegmentTree = [self.ide_ele] * (1 << (self.n + 1))
-        self.SegmentTree[1 << self.n : (1 << self.n) + self.N] = A[:]
+        self.n = (self.N - 1).bit_length()
+        self.size = 1 << self.n
         self.func = func
-        for pos in range((1 << self.n) - 1, 0, -1):
-            self.SegmentTree[pos] = self.func(self.SegmentTree[pos << 1], self.SegmentTree[pos << 1 | 1])
+        self.ide_ele = ide_ele
+        self.tree = [self.ide_ele] * (self.size << 1)
+        self.tree[self.size : self.size + self.N] = A[:]
+        for pos in range(self.size - 1, 0, -1):
+            self.tree[pos] = self.func(self.tree[pos << 1], self.tree[pos << 1 | 1])
 
     def update(self, pos: int, x: int):
         """pos (0 ≤ pos < N)番目の値をxに更新"""
-        pos += 1 << self.n
-        self.SegmentTree[pos] = x
+        pos += self.size
+        self.tree[pos] = x
         pos >>= 1
         while pos > 0:
-            self.SegmentTree[pos] = self.func(self.SegmentTree[pos << 1], self.SegmentTree[pos << 1 | 1])
+            self.tree[pos] = self.func(self.tree[pos << 1], self.tree[pos << 1 | 1])
             pos >>= 1
-    
+
     def add(self, pos: int, x: int):
         """pos (0 ≤ pos < N)番目の値にxを足す"""
-        pos += 1 << self.n
-        self.SegmentTree[pos] += x
+        pos += self.size
+        self.tree[pos] += x
         pos >>= 1
         while pos > 0:
-            self.SegmentTree[pos] = self.func(self.SegmentTree[pos << 1], self.SegmentTree[pos << 1 | 1])
+            self.tree[pos] = self.func(self.tree[pos << 1], self.tree[pos << 1 | 1])
             pos >>= 1
-    
+
     def query(self, l: int, r: int) -> int:
         """[l, r) (0 ≤ l < N, 1 ≤ r ≤ N)のfuncを求める"""
-        l += 1 << self.n
-        r += 1 << self.n
+        l += self.size
+        r += self.size
         value_l = self.ide_ele
         value_r = self.ide_ele
         while l != r:
-            if l & 1 == 1:
-                value_l = self.func(value_l, self.SegmentTree[l])
+            if l & 1:
+                value_l = self.func(value_l, self.tree[l])
                 l += 1
-            if r & 1 == 1:
+            if r & 1:
                 r -= 1
-                value_r = self.func(value_r, self.SegmentTree[r])
+                value_r = self.func(self.tree[r], value_r)
             l >>= 1
             r >>= 1
         return self.func(value_l, value_r)

@@ -7,21 +7,28 @@ const long long INF = 1LL << 61;
 const vector<pair<long long, long long>> moves = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
 bool bfs(const vector<string>& s, const long long& H, const long long& W, const long long& si, const long long& sj, const long long& gi, const long long& gj, const long long& x, const long long& T) {
+    // ダイクストラ法
     vector<vector<long long>> d(H, vector<long long>(W, INF));
+    d[si][sj] = 0;
     priority_queue<tlll, vector<tlll>, greater<tlll>> q;
     q.push({0, si, sj});
     while (!q.empty()) {
         auto [t, i, j] = q.top();
         q.pop();
-        if (d[i][j] != INF) continue; // すでに探索済み
+        if (d[i][j] > t) continue;
 
         d[i][j] = t;
         for (auto [di, dj] : moves) {
             long long ni = i + di, nj = j + dj;
-            if (ni < 0 || ni >= H || nj < 0 || nj >= W || d[ni][nj] != INF) continue;
+            if (ni < 0 || ni >= H || nj < 0 || nj >= W) continue;
 
-            if (s[ni][nj] != '#') q.push({t + 1, ni, nj});
-            else if (s[ni][nj] == '#') q.push({t + x, ni, nj});
+            if (s[ni][nj] != '#' && d[ni][nj] > t + 1) {
+                q.push({t + 1, ni, nj});
+                d[ni][nj] = t + 1;
+            } else if (s[ni][nj] == '#' && d[ni][nj] > t + x) {
+                q.push({t + x, ni, nj});
+                d[ni][nj] = t + x;
+            }
         }
     }
 

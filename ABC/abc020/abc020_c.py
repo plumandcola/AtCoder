@@ -1,22 +1,25 @@
 import heapq
 
 def bfs(x: int) -> bool:
-    d = [[-1] * W for _ in range(H)]
+    #ダイクストラ法
+    d = [[float("inf")] * W for _ in range(H)]
+    d[si][sj] = 0
     q = [(0, si, sj)]
     while q:
         t, i, j = heapq.heappop(q)
-        if d[i][j] != -1: continue #すでに探索済み
+        if d[i][j] > t: continue
 
-        d[i][j] = t
         for di, dj in ((-1, 0), (1, 0), (0, -1), (0, 1)):
             ni = i + di
             nj = j + dj
-            if ni < 0 or ni >= H or nj < 0 or nj >= W or d[ni][nj] != -1: continue
+            if ni < 0 or ni >= H or nj < 0 or nj >= W: continue
 
-            if s[ni][nj] != '#':
+            if s[ni][nj] != '#' and d[ni][nj] > t + 1:
                 heapq.heappush(q, (t + 1, ni, nj))
-            elif s[ni][nj] == '#':
+                d[ni][nj] = t + 1
+            elif s[ni][nj] == '#' and d[ni][nj] > t + x:
                 heapq.heappush(q, (t + x, ni, nj))
+                d[ni][nj] = t + x
     
     return d[gi][gj] <= T
 

@@ -1,5 +1,3 @@
-import heapq
-
 N, M = map(int, input().split())
 
 d = [[float("inf")] * N for _ in range(N)]

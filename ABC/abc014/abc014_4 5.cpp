@@ -2,15 +2,15 @@
 using namespace std;
 
 struct SegmentTree {
-    const int N, n;
+    const int N, n, size;
     vector<int> INF = {1 << 30, 1 << 30};
     vector<vector<int>> tree;
 
-    SegmentTree(vector<vector<int>> A) : N(A.size()), n(bit_length(N-1)), tree(1 << (n+1), INF) {
+    SegmentTree(vector<vector<int>> A) : N(A.size()), n(bit_length(N-1)), size(1 << n), tree(size << 1, INF) {
         for (int i = 0; i < N; i++) {
-            tree[(1 << n) + i] = A[i];
+            tree[size + i] = A[i];
         }
-        for (int pos = (1 << n) - 1; pos > 0; pos--) {
+        for (int pos = size - 1; pos > 0; pos--) {
             tree[pos] = min(tree[pos << 1], tree[pos << 1 | 1]);
         }
     }
@@ -26,8 +26,8 @@ struct SegmentTree {
 
     vector<int> query(int l, int r) {
         // [l, r) (0 ≤ l < N, 1 ≤ r ≤ N)のminを求める
-        l += 1 << n;
-        r += 1 << n;
+        l += size;
+        r += size;
         vector<int> value_l = INF, value_r = INF;
         while (l != r) {
             if (l & 1 == 1) {

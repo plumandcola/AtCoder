@@ -4,27 +4,28 @@ sys.setrecursionlimit(50000000)
 
 
 class SegmentTree:
-    def __init__(self, A: list[tuple]):
+    def __init__(self, A: list[int]):
         self.N = len(A)
         self.n = (self.N - 1).bit_length()
-        self.SegmentTree = [(float("inf"), float("inf"))] * (1 << (self.n + 1))
-        self.SegmentTree[1 << self.n : (1 << self.n) + self.N] = A[:]
-        for pos in range((1 << self.n) - 1, 0, -1):
-            self.SegmentTree[pos] = min(self.SegmentTree[pos << 1], self.SegmentTree[pos << 1 | 1])
+        self.size = 1 << self.n
+        self.tree = [(float("inf"), float("inf"))] * (self.size << 1)
+        self.tree[self.size : self.size + self.N] = A[:]
+        for pos in range(self.size - 1, 0, -1):
+            self.tree[pos] = min(self.tree[pos << 1], self.tree[pos << 1 | 1])
 
     def query(self, l: int, r: int) -> int:
         """[l, r) (0 ≤ l < N, 1 ≤ r ≤ N)のminを求める"""
-        l += 1 << self.n
-        r += 1 << self.n
+        l += self.size
+        r += self.size
         value_l = (float("inf"), float("inf"))
         value_r = (float("inf"), float("inf"))
         while l != r:
             if l & 1 == 1:
-                value_l = min(value_l, self.SegmentTree[l])
+                value_l = min(value_l, self.tree[l])
                 l += 1
             if r & 1 == 1:
                 r -= 1
-                value_r = min(self.SegmentTree[r], value_r)
+                value_r = min(self.tree[r], value_r)
             l >>= 1
             r >>= 1
         return min(value_l, value_r)

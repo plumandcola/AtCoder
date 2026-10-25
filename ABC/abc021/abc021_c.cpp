@@ -15,7 +15,7 @@ int main() {
     ans[a-1] = 1;
     vector<int> d(N, -1);
     d[a-1] = 0;
-    deque<int> q;
+    deque<int> q; // bfs
     q.push_back(a-1);
     while (!q.empty()) {
         int v = q.front();

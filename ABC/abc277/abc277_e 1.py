@@ -14,7 +14,7 @@ for s in map(int, input().split()):
 
 d = [float("inf")] * (2*N)
 d[N] = 0
-q = deque([N])
+q = deque([N]) #01-bfs
 while q:
     v = q.popleft()
     for u in g[v]:

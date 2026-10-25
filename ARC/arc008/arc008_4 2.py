@@ -1,23 +1,24 @@
 #100点解法
 class SegmentTree:
-    def __init__(self, n: int, func, ide_ele):
-        self.N = n
+    def __init__(self, N: int, func, ide_ele):
+        self.N = N
         self.n = (self.N - 1).bit_length()
-        self.ide_ele = ide_ele
-        self.SegmentTree = [self.ide_ele] * (1 << (self.n + 1))
+        self.size = 1 << self.n
         self.func = func
+        self.ide_ele = ide_ele
+        self.tree = [self.ide_ele] * (self.size << 1)
 
-    def update(self, pos: int, x: tuple):
+    def update(self, pos: int, x: int):
         """pos (0 ≤ pos < N)番目の値をxに更新"""
-        pos += 1 << self.n
-        self.SegmentTree[pos] = x
+        pos += self.size
+        self.tree[pos] = x
         pos >>= 1
         while pos > 0:
-            self.SegmentTree[pos] = self.func(self.SegmentTree[pos << 1], self.SegmentTree[pos << 1 | 1])
+            self.tree[pos] = self.func(self.tree[pos << 1], self.tree[pos << 1 | 1])
             pos >>= 1
 
     def query(self) -> float:
-        return self.SegmentTree[1][0] + self.SegmentTree[1][1]
+        return self.tree[1][0] + self.tree[1][1]
 
 def op(x: tuple, y: tuple) -> tuple:
     return (x[0] * y[0], x[1] * y[0] + y[1])
