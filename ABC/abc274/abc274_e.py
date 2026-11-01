@@ -21,10 +21,11 @@ for i in range(N+M):
 #集合のサイズを1つずつ大きくしていく
 for b in range(1, 1 << (N+M)):
     for i in range(N+M):
-        if (b >> i) & 1 == 0: continue
+        if ((b >> i) & 1) == 0: continue
 
         for j in range(N+M):
-            if (b >> j) & 1 == 1: continue
+            if ((b >> j) & 1) == 1: continue
+            
             dp[b | 1 << j][j] = min(dp[b | 1 << j][j], dp[b][i] + d[i][j] / 2 ** (b >> N).bit_count())
 
 ans = float("inf")

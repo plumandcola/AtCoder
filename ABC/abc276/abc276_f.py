@@ -21,10 +21,10 @@ class SegmentTree:
         value_l = 0
         value_r = 0
         while l != r:
-            if l & 1 == 1:
+            if l & 1:
                 value_l += self.tree[l]
                 l += 1
-            if r & 1 == 1:
+            if r & 1:
                 r -= 1
                 value_r += self.tree[r]
             l >>= 1

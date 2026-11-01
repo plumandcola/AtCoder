@@ -30,11 +30,11 @@ struct SegmentTree {
         r += size;
         vector<int> value_l = INF, value_r = INF;
         while (l != r) {
-            if (l & 1 == 1) {
+            if (l & 1) {
                 value_l = min(value_l, tree[l]);
                 l++;
             }
-            if (r & 1 == 1) {
+            if (r & 1) {
                 r--;
                 value_r = min(tree[r], value_r);
             }

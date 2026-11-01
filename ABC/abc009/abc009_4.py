@@ -27,7 +27,7 @@ else:
     M -= K
 
     while M:
-        if M & 1 == 1:
+        if M & 1:
             ans = matrix_product(transformation_matrix, ans)
         transformation_matrix = matrix_product(transformation_matrix, transformation_matrix)
         M >>= 1

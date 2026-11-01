@@ -11,7 +11,7 @@ for i in range(1, (1 << N)): #0はどの段も使わないことになるので�
     b = (1 << 26) - 1
     count = 0 #使える段の数
     for j in range(N):
-        if (i >> j) & 1 == 1:
+        if (i >> j) & 1:
             b &= S[j]
             count += 1
     

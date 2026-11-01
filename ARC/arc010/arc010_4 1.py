@@ -28,7 +28,7 @@ for b in range(1 << N):
     visited = [False] * N
     count = 0 #機密情報を直接伝えた仲間の人数
     for i in range(N):
-        if (b >> i) & 1 == 1:
+        if (b >> i) & 1:
             count += 1
             q = [i]
             while q:

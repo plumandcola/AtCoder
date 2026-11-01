@@ -21,7 +21,7 @@ mod = 998244353
 transformation_matrix = [[H+W-4, H-1, W-1, 0], [1, W-2, 0, W-1], [1, 0, H-2, H-1], [0, 1, 1, 0]]
 
 while K:
-    if K & 1 == 1:
+    if K & 1:
         ans = matrix_product(transformation_matrix, ans)
     transformation_matrix = matrix_product(transformation_matrix, transformation_matrix)
     K >>= 1

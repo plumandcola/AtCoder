@@ -11,7 +11,7 @@ int main() {
     int n = N / 5; // 操作5回を1周期として、何周期か
     int i = 0; // 周期数が2の何乗か
     while (n) {
-        if (n & 1 == 1) {
+        if (n & 1) {
             for (int j = 0; j < 6; j++) cards[j] = dp[i][cards[j] - 1];
         }
 

@@ -30,7 +30,7 @@ int main() {
     vector<vector<int>> transformation_matrix = {{1, 1, 1}, {1, 0, 0}, {0, 1, 0}};
     
     while (n) {
-        if ((n & 1) == 1) {
+        if (n & 1) {
             a = matrix_product(transformation_matrix, a);
         }
         transformation_matrix = matrix_product(transformation_matrix, transformation_matrix);

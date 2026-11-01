@@ -12,7 +12,7 @@ for i in range(M):
 amida = list(range(N))
 i = 0
 while D:
-    if D & 1 == 1:
+    if D & 1:
         amida = [dp[i][amida[j]] for j in range(N)]
     dp[i+1] = [dp[i][dp[i][j]] for j in range(N)]
     D >>= 1

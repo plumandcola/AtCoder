@@ -18,7 +18,7 @@ mod = 998244353
 
 N -= 1
 while N:
-    if N & 1 == 1:
+    if N & 1:
         ans = matrix_product(transformation_matrix, ans)
     transformation_matrix = matrix_product(transformation_matrix, transformation_matrix)
     N >>= 1

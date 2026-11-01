@@ -1,6 +1,6 @@
 #100点解法
 import sys
-sys.setrecursionlimit(50000000)
+sys.setrecursionlimit(10000000)
 
 
 class SegmentTree:
@@ -20,10 +20,10 @@ class SegmentTree:
         value_l = (float("inf"), float("inf"))
         value_r = (float("inf"), float("inf"))
         while l != r:
-            if l & 1 == 1:
+            if l & 1:
                 value_l = min(value_l, self.tree[l])
                 l += 1
-            if r & 1 == 1:
+            if r & 1:
                 r -= 1
                 value_r = min(self.tree[r], value_r)
             l >>= 1

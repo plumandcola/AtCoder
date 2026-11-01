@@ -18,7 +18,7 @@ transformation_matrix = [[1 if 1 <= i-j <= M else 0 for j in range(K+1)] for i i
 mod = 998244353
 
 while N:
-    if N & 1 == 1:
+    if N & 1:
         ans = matrix_product(transformation_matrix, ans)
     transformation_matrix = matrix_product(transformation_matrix, transformation_matrix)
     N >>= 1

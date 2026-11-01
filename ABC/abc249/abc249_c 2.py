@@ -12,7 +12,7 @@ for b in range(1, 1 << N): #b=0はどれも選ばないが、K≥1より不適�
         c = chr(ord('a') + i)
         s = 0
         for j in range(N):
-            if (b >> j) & 1 == 1:
+            if (b >> j) & 1:
                 s += (S[j] >> i) & 1
         
         if s == K:

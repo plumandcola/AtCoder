@@ -13,7 +13,7 @@ for i in range(1 << E): #bit全探索
     g = [[] for _ in range(N)]
     for j in range(E):
         a, b = friends[j]
-        if (i >> j) & 1 == 1: #二人の友人関係を解消する
+        if (i >> j) & 1: #二人の友人関係を解消する
             ans_i += 1
         else: #二人の友人関係はそのまま
             g[a].append(b)

@@ -9,10 +9,10 @@ for b_1 in range(1 << H_1):
     for b_2 in range(1 << W_1):
         C = []
         for i in range(H_1):
-            if (b_1 >> i) & 1 == 1:
+            if (b_1 >> i) & 1:
                 C.append([])
                 for j in range(W_1):
-                    if (b_2 >> j) & 1 == 1:
+                    if (b_2 >> j) & 1:
                         C[-1].append(A[i][j])
         if C == B:
             ans = "Yes"

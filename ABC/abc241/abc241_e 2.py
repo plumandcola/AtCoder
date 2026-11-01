@@ -9,7 +9,7 @@ i = 0
 while K:
     for j in range(N):
         dp[i+1][j] = dp[i][j] + dp[i][(j + dp[i][j]) % N]
-    if K & 1 == 1:
+    if K & 1:
         ans += dp[i][ans % N]
     i += 1
     K >>= 1

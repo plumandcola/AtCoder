@@ -27,7 +27,7 @@ int main() {
         vector<bool> trackable(N, false); // 高橋君が辿ることが可能かどうか
         vector<vector<int>> g(N, vector<int>(0));
         for (int j = 0; j < E; j++) {
-            if ((i >> j) & 1 == 1) ans_i++; // 二人の友人関係を解消する
+            if ((i >> j) & 1) ans_i++; // 二人の友人関係を解消する
             else { // 二人の友人関係はそのまま
                 int a = friends[j][0];
                 int b = friends[j][1];

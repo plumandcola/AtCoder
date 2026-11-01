@@ -17,7 +17,7 @@ int main() {
     for (int i = 0; i < N; i++) amida[i] = i;
     int i = 0;
     while (D) {
-        if (D & 1 == 1) {
+        if (D & 1) {
             for (int j = 0; j < N; j++) amida[j] = dp[i][amida[j]];
         }
         for (int j = 0; j < N; j++) dp[i+1][j] = dp[i][dp[i][j]];
