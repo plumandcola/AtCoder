@@ -1,0 +1,1 @@
+print("YES" if input().endswith("T") else "NO")
